@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Task 3 - Advanced CSS Styling</title>
+
+
+    <style>
+
+        /* =====================================
+           RESET
+        ===================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: #f1f5f9;
+
+            color: #1e293b;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================
+           NAVIGATION
+        ===================================== */
+
+        nav {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #111827,
+                    #312e81,
+                    #1e3a8a
+                );
+
+            color: white;
+
+            padding: 18px 8%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.3);
+
+            animation:
+                navSlide 1s ease;
+        }
+
+
+        .logo {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            animation:
+                logoPulse 2s infinite;
+        }
+
+
+        nav ul {
+
+            display: flex;
+
+            list-style: none;
+
+            gap: 30px;
+        }
+
+
+        nav a {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            position: relative;
+
+            transition:
+                color 0.3s ease;
+        }
+
+
+        nav a::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: -7px;
+
+            width: 0;
+
+            height: 3px;
+
+            background: #60a5fa;
+
+            transition:
+                width 0.3s ease;
+        }
+
+
+        nav a:hover {
+
+            color: #93c5fd;
+        }
+
+
+        nav a:hover::after {
+
+            width: 100%;
+        }
+
+
+        /* =====================================
+           HERO SECTION
+        ===================================== */
+
+        .hero {
+
+            min-height: 520px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed,
+                    #db2777
+                );
+
+            background-size: 300% 300%;
+
+            animation:
+                gradientMove 6s ease infinite;
+        }
+
+
+        .hero-content {
+
+            max-width: 850px;
+
+            animation:
+                heroAppear 1.5s ease;
+        }
+
+
+        .hero h1 {
+
+            font-size: 52px;
+
+            margin-bottom: 20px;
+
+            text-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.3);
+
+            animation:
+                titleFloat 3s ease-in-out infinite;
+        }
+
+
+        .hero p {
+
+            font-size: 20px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .hero-button {
+
+            display: inline-block;
+
+            padding: 15px 35px;
+
+            background: white;
+
+            color: #2563eb;
+
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.25);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+        }
+
+
+        .hero-button:hover {
+
+            transform:
+                translateY(-8px)
+                scale(1.08);
+
+            background: #dbeafe;
+
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+
+        /* =====================================
+           FEATURES SECTION
+        ===================================== */
+
+        .features {
+
+            padding: 80px 8%;
+        }
+
+
+        .section-title {
+
+            text-align: center;
+
+            font-size: 38px;
+
+            margin-bottom: 50px;
+
+            position: relative;
+        }
+
+
+        .section-title::after {
+
+            content: "";
+
+            display: block;
+
+            width: 80px;
+
+            height: 5px;
+
+            margin: 12px auto;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #9333ea
+                );
+
+            border-radius: 10px;
+        }
+
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 30px;
+        }
+
+
+        .card {
+
+            background: white;
+
+            padding: 40px 30px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            border: 2px solid transparent;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.1);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+
+            animation:
+                cardAppear 1s ease;
+        }
+
+
+        .card:hover {
+
+            transform:
+                translateY(-15px)
+                rotate(1deg)
+                scale(1.03);
+
+            border-color: #6366f1;
+
+            box-shadow:
+                0 20px 45px
+                rgba(37, 99, 235, 0.3);
+        }
+
+
+        .card-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 20px;
+
+            display: inline-block;
+
+            animation:
+                iconBounce 2s infinite;
+        }
+
+
+        .card h3 {
+
+            font-size: 23px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .card p {
+
+            color: #64748b;
+        }
+
+
+        /* =====================================
+           CONTACT SECTION
+        ===================================== */
+
+        .contact {
+
+            padding: 80px 8%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e0e7ff,
+                    #fce7f3
+                );
+        }
+
+
+        .form-container {
+
+            max-width: 700px;
+
+            margin: auto;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.15);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease;
+        }
+
+
+        .form-container:hover {
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 25px 55px
+                rgba(0, 0, 0, 0.2);
+        }
+
+
+        .form-group {
+
+            margin-bottom: 22px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+        }
+
+
+        .form-group input,
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border:
+                2px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                transform 0.3s ease;
+        }
+
+
+        .form-group input:hover,
+        .form-group textarea:hover {
+
+            border-color: #818cf8;
+        }
+
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+
+            outline: none;
+
+            border-color: #4f46e5;
+
+            transform:
+                scale(1.02);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(79, 70, 229, 0.15);
+        }
+
+
+        textarea {
+
+            min-height: 140px;
+
+            resize: vertical;
+        }
+
+
+        .submit-button {
+
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #7c3aed,
+                    #db2777
+                );
+
+            background-size: 200% 100%;
+
+            color: white;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+            animation:
+                buttonGlow 2s infinite;
+        }
+
+
+        .submit-button:hover {
+
+            transform:
+                translateY(-5px)
+                scale(1.02);
+
+            box-shadow:
+                0 12px 30px
+                rgba(124, 58, 237, 0.4);
+        }
+
+
+        /* =====================================
+           SUCCESS MESSAGE
+        ===================================== */
+
+        .success {
+
+            background: #dcfce7;
+
+            color: #166534;
+
+            border:
+                2px solid #86efac;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            animation:
+                successAppear 0.8s ease;
+        }
+
+
+        /* =====================================
+           ERROR MESSAGE
+        ===================================== */
+
+        .error-box {
+
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            border:
+                2px solid #fca5a5;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            animation:
+                shake 0.5s ease;
+        }
+
+
+        .error-box ul {
+
+            margin-left: 20px;
+        }
+
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        footer {
+
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+
+        /* =====================================
+           ANIMATIONS
+        ===================================== */
+
+        @keyframes navSlide {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(-100%);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        @keyframes logoPulse {
+
+            0%, 100% {
+
+                transform:
+                    scale(1);
+            }
+
+            50% {
+
+                transform:
+                    scale(1.08);
+            }
+        }
+
+
+        @keyframes gradientMove {
+
+            0% {
+
+                background-position:
+                    0% 50%;
+            }
+
+            50% {
+
+                background-position:
+                    100% 50%;
+            }
+
+            100% {
+
+                background-position:
+                    0% 50%;
+            }
+        }
+
+
+        @keyframes heroAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.7)
+                    translateY(50px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    translateY(0);
+            }
+        }
+
+
+        @keyframes titleFloat {
+
+            0%, 100% {
+
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+
+                transform:
+                    translateY(-10px);
+            }
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(50px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        @keyframes iconBounce {
+
+            0%, 100% {
+
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+
+                transform:
+                    translateY(-12px);
+            }
+        }
+
+
+        @keyframes buttonGlow {
+
+            0%, 100% {
+
+                box-shadow:
+                    0 0 0
+                    rgba(99, 102, 241, 0);
+            }
+
+            50% {
+
+                box-shadow:
+                    0 0 20px
+                    rgba(99, 102, 241, 0.5);
+            }
+        }
+
+
+        @keyframes successAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.8);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1);
+            }
+        }
+
+
+        @keyframes shake {
+
+            0%, 100% {
+
+                transform:
+                    translateX(0);
+            }
+
+            25% {
+
+                transform:
+                    translateX(-8px);
+            }
+
+            75% {
+
+                transform:
+                    translateX(8px);
+            }
+        }
+
+
+        /* =====================================
+           TABLET RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 900px) {
+
+            .cards {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .hero h1 {
+
+                font-size: 42px;
+            }
+        }
+
+
+        /* =====================================
+           MOBILE RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 600px) {
+
+            nav {
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+
+            nav ul {
+
+                gap: 15px;
+            }
+
+
+            .hero {
+
+                min-height: 450px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 34px;
+            }
+
+
+            .hero p {
+
+                font-size: 17px;
+            }
+
+
+            .cards {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .section-title {
+
+                font-size: 30px;
+            }
+
+
+            .form-container {
+
+                padding: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         NAVIGATION
+    ====================================== -->
+
+    <nav>
+
+        <div class="logo">
+            Cognifyz Task 3
+        </div>
+
+
+        <ul>
+
+            <li>
+                <a href="#home">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="#features">
+                    Features
+                </a>
+            </li>
+
+            <li>
+                <a href="#contact">
+                    Contact
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =====================================
+         HERO SECTION
+    ====================================== -->
+
+    <section
+        class="hero"
+        id="home"
+    >
+
+        <div class="hero-content">
+
+            <h1>
+                Advanced CSS & Responsive Design
+            </h1>
+
+
+            <p>
+                A modern responsive webpage created using
+                HTML, CSS, Express and EJS.
+            </p>
+
+
+            <a
+                href="#contact"
+                class="hero-button"
+            >
+                Contact Us
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         FEATURES SECTION
+    ====================================== -->
+
+    <section
+        class="features"
+        id="features"
+    >
+
+        <h2 class="section-title">
+            Advanced Features
+        </h2>
+
+
+        <div class="cards">
+
+
+            <!-- CARD 1 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📱
+                </div>
+
+
+                <h3>
+                    Responsive Design
+                </h3>
+
+
+                <p>
+                    The webpage automatically adapts
+                    to desktop, tablet and mobile
+                    screen sizes.
+                </p>
+
+            </div>
+
+
+            <!-- CARD 2 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🎨
+                </div>
+
+
+                <h3>
+                    Modern CSS
+                </h3>
+
+
+                <p>
+                    Gradients, shadows, borders,
+                    transitions and hover effects
+                    are used for styling.
+                </p>
+
+            </div>
+
+
+            <!-- CARD 3 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    ✨
+                </div>
+
+
+                <h3>
+                    CSS Animations
+                </h3>
+
+
+                <p>
+                    CSS animations create a smooth
+                    and attractive user experience.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         CONTACT SECTION
+    ====================================== -->
+
+    <section
+        class="contact"
+        id="contact"
+    >
+
+        <h2 class="section-title">
+            Contact Form
+        </h2>
+
+
+        <div class="form-container">
+
+
+            <!-- SUCCESS MESSAGE -->
+
+            <% if (submitted) { %>
+
+                <div class="success">
+
+                    Form submitted successfully!
+
+                </div>
+
+            <% } %>
+
+
+            <!-- ERROR MESSAGE -->
+
+            <% if (
+                typeof errors !== "undefined" &&
+                errors.length > 0
+            ) { %>
+
+                <div class="error-box">
+
+                    <strong>
+                        Please fix the following:
+                    </strong>
+
+
+                    <ul>
+
+                        <% errors.forEach(function(error) { %>
+
+                            <li>
+                                <%= error %>
+                            </li>
+
+                        <% }) %>
+
+                    </ul>
+
+                </div>
+
+            <% } %>
+
+
+            <!-- FORM -->
+
+            <form
+                action="/submit"
+                method="POST"
+            >
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        value="<%= formData.name || '' %>"
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        value="<%= formData.email || '' %>"
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone
+                    </label>
+
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                        value="<%= formData.phone || '' %>"
+                    >
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Message
+                    </label>
+
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Enter your message"
+                    ><%= formData.message || '' %></textarea>
+
+                </div>
+
+
+                <!-- SUBMIT BUTTON -->
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    Submit Form
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Cognifyz Technologies
+            - Task 3
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

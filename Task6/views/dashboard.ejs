@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Task 6 - Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h1>Welcome!</h1>
+
+        <p id="welcomeMessage">
+            Loading user information...
+        </p>
+
+
+        <div id="userInfo"></div>
+
+
+        <button
+            type="button"
+            id="loadUsersButton"
+        >
+            View All Users
+        </button>
+
+
+        <div id="users"></div>
+
+
+        <button
+            type="button"
+            id="logoutButton"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const token =
+    localStorage.getItem("token");
+
+
+// ==========================================
+// CHECK LOGIN
+// ==========================================
+
+if (!token) {
+
+    window.location.href = "/login";
+
+}
+
+
+// ==========================================
+// LOAD CURRENT USER
+// ==========================================
+
+async function loadCurrentUser() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/me",
+                {
+
+                    method: "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            "Bearer " + token
+
+                    }
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            localStorage.removeItem("token");
+
+            localStorage.removeItem("user");
+
+            window.location.href =
+                "/login";
+
+            return;
+
+        }
+
+
+        const user =
+            result.user;
+
+
+        document
+            .getElementById(
+                "welcomeMessage"
+            )
+            .textContent =
+                "Welcome, " +
+                user.name +
+                "!";
+
+
+        document
+            .getElementById(
+                "userInfo"
+            )
+            .innerHTML = `
+
+                <p>
+                    <strong>Name:</strong>
+                    ${user.name}
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    ${user.email}
+                </p>
+
+                <p>
+                    <strong>User ID:</strong>
+                    ${user._id}
+                </p>
+
+            `;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        document
+            .getElementById(
+                "welcomeMessage"
+            )
+            .textContent =
+                "Unable to load user information.";
+
+    }
+
+}
+
+
+// ==========================================
+// LOAD ALL USERS
+// ==========================================
+
+document
+    .getElementById(
+        "loadUsersButton"
+    )
+    .addEventListener(
+        "click",
+        async function() {
+
+            const usersContainer =
+                document.getElementById(
+                    "users"
+                );
+
+
+            usersContainer.innerHTML =
+                "<p>Loading users...</p>";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/users",
+                        {
+
+                            method: "GET",
+
+                            headers: {
+
+                                "Authorization":
+                                    "Bearer " + token
+
+                            }
+
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    usersContainer.innerHTML = `
+                        <p class="error">
+                            ${result.message}
+                        </p>
+                    `;
+
+                    return;
+
+                }
+
+
+                let html =
+                    "<h3>Registered Users</h3>";
+
+
+                result.users.forEach(
+                    function(user) {
+
+                        html += `
+
+                            <div
+                                style="
+                                    padding: 10px;
+                                    margin: 8px 0;
+                                    background: #f1f5f9;
+                                    border-radius: 8px;
+                                "
+                            >
+
+                                <strong>
+                                    ${user.name}
+                                </strong>
+
+                                <br>
+
+                                ${user.email}
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+
+                usersContainer.innerHTML =
+                    html;
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                usersContainer.innerHTML = `
+
+                    <p class="error">
+                        Unable to load users.
+                    </p>
+
+                `;
+
+            }
+
+        }
+    );
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+document
+    .getElementById(
+        "logoutButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            localStorage.removeItem(
+                "token"
+            );
+
+            localStorage.removeItem(
+                "user"
+            );
+
+            window.location.href =
+                "/login";
+
+        }
+    );
+
+
+// ==========================================
+// START
+// ==========================================
+
+loadCurrentUser();
+
+</script>
+
+</body>
+
+</html>

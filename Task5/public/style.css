@@ -1,0 +1,973 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f1f5f9;
+
+    color: #1e293b;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================
+   NAVBAR
+===================================== */
+
+nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 18px 8%;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #111827,
+            #1e3a8a,
+            #4f46e5
+        );
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.2);
+}
+
+
+.logo {
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    gap: 25px;
+}
+
+
+.nav-links a {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.nav-links a:hover {
+
+    transform:
+        translateY(-3px);
+
+    color: #bfdbfe;
+}
+
+
+/* =====================================
+   HERO
+===================================== */
+
+.hero {
+
+    min-height: 480px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed,
+            #db2777
+        );
+
+    background-size: 300% 300%;
+
+    animation:
+        gradientAnimation 7s infinite;
+}
+
+
+@keyframes gradientAnimation {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.hero h1 {
+
+    font-size: 55px;
+
+    margin-bottom: 15px;
+}
+
+
+.hero p {
+
+    font-size: 22px;
+
+    margin-bottom: 30px;
+}
+
+
+.hero button {
+
+    padding: 15px 30px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: white;
+
+    color: #2563eb;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.hero button:hover {
+
+    transform:
+        scale(1.08);
+}
+
+
+/* =====================================
+   FEATURES
+===================================== */
+
+.features {
+
+    padding: 70px 8%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+
+.feature-card {
+
+    background: white;
+
+    text-align: center;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0, 0, 0, 0.1);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.feature-card:hover {
+
+    transform:
+        translateY(-10px);
+
+    box-shadow:
+        0 20px 40px
+        rgba(37, 99, 235, 0.2);
+}
+
+
+.icon {
+
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =====================================
+   USER SECTION
+===================================== */
+
+.users-section {
+
+    padding: 80px 8%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #eef2ff
+        );
+}
+
+
+.section-title {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+
+.section-title h2 {
+
+    font-size: 40px;
+
+    color: #1e3a8a;
+}
+
+
+.section-title p {
+
+    color: #64748b;
+}
+
+
+/* =====================================
+   FORM
+===================================== */
+
+.form-card {
+
+    max-width: 650px;
+
+    margin: auto;
+
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+.form-card h3 {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    font-size: 25px;
+}
+
+
+.form-group {
+
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border:
+        2px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    transition:
+        border-color 0.3s ease;
+}
+
+
+.form-group input:focus {
+
+    outline: none;
+
+    border-color: #4f46e5;
+}
+
+
+.form-buttons {
+
+    display: flex;
+
+    gap: 12px;
+}
+
+
+.primary-button,
+.cancel-button {
+
+    flex: 1;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.primary-button {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #7c3aed
+        );
+}
+
+
+.cancel-button {
+
+    background: #e2e8f0;
+
+    color: #334155;
+
+    display: none;
+}
+
+
+/* =====================================
+   MESSAGE
+===================================== */
+
+.message {
+
+    max-width: 650px;
+
+    margin: 25px auto;
+
+    padding: 15px;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    display: none;
+}
+
+
+.message.success {
+
+    display: block;
+
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+
+.message.error {
+
+    display: block;
+
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+
+/* =====================================
+   USERS LIST
+===================================== */
+
+.user-list {
+
+    max-width: 1100px;
+
+    margin: 50px auto 0;
+}
+
+
+.user-list h3 {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    font-size: 28px;
+}
+
+
+.users-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+.user-card {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.1);
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.user-card:hover {
+
+    transform:
+        translateY(-7px);
+}
+
+
+.user-card h4 {
+
+    color: #1e3a8a;
+
+    font-size: 21px;
+
+    margin-bottom: 10px;
+}
+
+
+.user-card p {
+
+    color: #64748b;
+
+    margin-bottom: 5px;
+}
+
+
+.user-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.edit-button,
+.delete-button {
+
+    flex: 1;
+
+    padding: 9px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+.edit-button {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+}
+
+
+.delete-button {
+
+    background: #fee2e2;
+
+    color: #dc2626;
+}
+
+
+.loading {
+
+    text-align: center;
+
+    color: #64748b;
+}
+
+
+/* =====================================
+   API SECTION
+===================================== */
+
+.api-section {
+
+    padding: 80px 8%;
+
+    background: white;
+}
+
+
+.api-section h2 {
+
+    text-align: center;
+
+    font-size: 38px;
+
+    margin-bottom: 35px;
+}
+
+
+.api-table {
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.1);
+}
+
+
+.api-row {
+
+    display: grid;
+
+    grid-template-columns:
+        120px 1fr 1fr;
+
+    padding: 18px;
+
+    background: #f8fafc;
+
+    border-bottom:
+        1px solid #e2e8f0;
+}
+
+
+.api-row.header {
+
+    background: #1e3a8a;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+
+.get {
+
+    color: #16a34a;
+
+    font-weight: bold;
+}
+
+
+.post {
+
+    color: #2563eb;
+
+    font-weight: bold;
+}
+
+
+.put {
+
+    color: #ca8a04;
+
+    font-weight: bold;
+}
+
+
+.delete {
+
+    color: #dc2626;
+
+    font-weight: bold;
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: white;
+
+    background: #111827;
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 900px) {
+
+    .features {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .users-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    nav {
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    .nav-links {
+
+        gap: 15px;
+    }
+
+
+    .hero h1 {
+
+        font-size: 38px;
+    }
+
+
+    .features {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .users-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .api-row {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 5px;
+    }
+
+
+    .form-buttons {
+
+        flex-direction: column;
+    }
+
+}
+/* =====================================
+   API TESTING
+===================================== */
+
+.api-description {
+
+    text-align: center;
+
+    color: #64748b;
+
+    margin-bottom: 30px;
+}
+
+
+.api-card {
+
+    max-width: 900px;
+
+    margin: 15px auto;
+
+    padding: 20px 25px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.api-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+.api-card strong {
+
+    margin-left: 12px;
+
+    font-size: 18px;
+}
+
+
+.api-card p {
+
+    margin-top: 8px;
+
+    color: #64748b;
+}
+
+
+.method {
+
+    display: inline-block;
+
+    min-width: 65px;
+
+    padding: 6px 10px;
+
+    border-radius: 7px;
+
+    color: white;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 13px;
+}
+
+
+.method.get {
+
+    background: #16a34a;
+}
+
+
+.method.post {
+
+    background: #2563eb;
+}
+
+
+.method.put {
+
+    background: #ca8a04;
+}
+
+
+.method.delete {
+
+    background: #dc2626;
+}
+
+
+.api-button {
+
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.api-button:hover {
+
+    transform: scale(1.05);
+}
+
+
+/* API RESPONSE */
+
+.response-box {
+
+    max-width: 900px;
+
+    margin: 35px auto;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    background: #111827;
+
+    color: #e2e8f0;
+
+    overflow-x: auto;
+}
+
+
+.response-box h3 {
+
+    color: white;
+
+    margin-bottom: 15px;
+}
+
+
+.response-box pre {
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    font-family:
+        Consolas,
+        monospace;
+
+    line-height: 1.6;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .api-card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .api-button {
+
+        width: 100%;
+    }
+
+}

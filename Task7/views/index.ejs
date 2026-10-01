@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Task 7 - Weather Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header class="main-header">
+
+        <div class="header-content">
+
+            <div>
+
+                <h1>
+                    🌤️ Weather Dashboard
+                </h1>
+
+                <p>
+                    Cognifyz Full Stack Internship - Task 7
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================
+         MAIN
+    ====================================== -->
+
+    <main class="container">
+
+        <!-- =================================
+             INTRO
+        ================================== -->
+
+        <section class="hero-section">
+
+            <h2>
+                Check Weather Anywhere 🌍
+            </h2>
+
+            <p>
+                Enter a city or state to get current weather
+                and a 5-day forecast.
+            </p>
+
+        </section>
+
+
+        <!-- =================================
+             SEARCH
+        ================================== -->
+
+        <section class="search-section">
+
+            <form id="weatherForm">
+
+                <input
+                    type="text"
+                    id="cityInput"
+                    placeholder="Enter city or state..."
+                    autocomplete="off"
+                >
+
+                <button type="submit">
+                    🔍 Search Weather
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- =================================
+             LOADING
+        ================================== -->
+
+        <div
+            id="loading"
+            class="loading hidden"
+        >
+
+            <div class="spinner"></div>
+
+            <p>
+                Loading weather information...
+            </p>
+
+        </div>
+
+
+        <!-- =================================
+             ERROR
+        ================================== -->
+
+        <div
+            id="errorBox"
+            class="error-box hidden"
+        >
+
+            <span>⚠️</span>
+
+            <p id="errorMessage"></p>
+
+        </div>
+
+
+        <!-- =================================
+             WEATHER RESULT
+        ================================== -->
+
+        <section
+            id="weatherSection"
+            class="weather-section hidden"
+        >
+
+            <!-- LOCATION -->
+
+            <div class="location-header">
+
+                <h2 id="locationName">
+                    --
+                </h2>
+
+                <p id="weatherDescription">
+                    --
+                </p>
+
+            </div>
+
+
+            <!-- CURRENT WEATHER -->
+
+            <div class="current-weather">
+
+                <div class="main-weather-card">
+
+                    <img
+                        id="weatherIcon"
+                        src=""
+                        alt="Weather icon"
+                    >
+
+                    <div>
+
+                        <div
+                            id="temperature"
+                            class="temperature"
+                        >
+                            --°C
+                        </div>
+
+                        <p id="weatherMain">
+                            --
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 CLICKABLE WEATHER CARDS
+            ================================== -->
+
+            <div class="weather-grid">
+
+                <!-- WEATHER -->
+
+                <button
+                    class="weather-card"
+                    onclick="showWeatherDetails()"
+                >
+
+                    <span class="card-icon">
+                        🌤️
+                    </span>
+
+                    <span class="card-title">
+                        Weather
+                    </span>
+
+                    <strong id="weatherCardValue">
+                        --
+                    </strong>
+
+                    <span class="click-text">
+                        Click for details →
+                    </span>
+
+                </button>
+
+
+                <!-- PRESSURE -->
+
+                <button
+                    class="weather-card"
+                    onclick="showPressureDetails()"
+                >
+
+                    <span class="card-icon">
+                        📊
+                    </span>
+
+                    <span class="card-title">
+                        Pressure
+                    </span>
+
+                    <strong id="pressure">
+                        -- hPa
+                    </strong>
+
+                    <span class="click-text">
+                        Click for details →
+                    </span>
+
+                </button>
+
+
+                <!-- HUMIDITY -->
+
+                <button
+                    class="weather-card"
+                    onclick="showHumidityDetails()"
+                >
+
+                    <span class="card-icon">
+                        💧
+                    </span>
+
+                    <span class="card-title">
+                        Humidity
+                    </span>
+
+                    <strong id="humidity">
+                        --%
+                    </strong>
+
+                    <span class="click-text">
+                        Click for details →
+                    </span>
+
+                </button>
+
+
+                <!-- FEELS LIKE -->
+
+                <button
+                    class="weather-card"
+                    onclick="showFeelsLikeDetails()"
+                >
+
+                    <span class="card-icon">
+                        🤒
+                    </span>
+
+                    <span class="card-title">
+                        Feels Like
+                    </span>
+
+                    <strong id="feelsLike">
+                        --°C
+                    </strong>
+
+                    <span class="click-text">
+                        Click for details →
+                    </span>
+
+                </button>
+
+
+                <!-- WIND -->
+
+                <button
+                    class="weather-card"
+                    onclick="showWindDetails()"
+                >
+
+                    <span class="card-icon">
+                        💨
+                    </span>
+
+                    <span class="card-title">
+                        Wind Speed
+                    </span>
+
+                    <strong id="windSpeed">
+                        -- m/s
+                    </strong>
+
+                    <span class="click-text">
+                        Click for details →
+                    </span>
+
+                </button>
+
+
+                <!-- VISIBILITY -->
+
+                <button
+                    class="weather-card"
+                    onclick="showVisibilityDetails()"
+                >
+
+                    <span class="card-icon">
+                        👁️
+                    </span>
+
+                    <span class="card-title">
+                        Visibility
+                    </span>
+
+                    <strong id="visibility">
+                        -- km
+                    </strong>
+
+                    <span class="click-text">
+                        Click for details →
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                 SUNRISE / SUNSET
+            ================================== -->
+
+            <div class="sun-grid">
+
+                <div class="sun-card">
+
+                    <span>
+                        🌅
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Sunrise
+                        </h3>
+
+                        <p id="sunrise">
+                            --
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sun-card">
+
+                    <span>
+                        🌇
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Sunset
+                        </h3>
+
+                        <p id="sunset">
+                            --
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sun-card">
+
+                    <span>
+                        📍
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Coordinates
+                        </h3>
+
+                        <p id="coordinates">
+                            --
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 5 DAY FORECAST
+            ================================== -->
+
+            <section class="forecast-section">
+
+                <h2>
+                    📅 5-Day Forecast
+                </h2>
+
+                <div
+                    id="forecastGrid"
+                    class="forecast-grid"
+                >
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =================================
+             ADVANCED API FEATURES
+        ================================== -->
+
+        <section class="advanced-section">
+
+            <div class="section-heading">
+
+                <h2>
+                    🚀 Advanced API Features
+                </h2>
+
+                <p>
+                    Click any card to learn about the feature.
+                </p>
+
+            </div>
+
+
+            <div class="advanced-grid">
+
+
+                <!-- OAUTH -->
+
+                <button
+                    class="advanced-card"
+                    onclick="showOAuthDetails()"
+                >
+
+                    <div class="advanced-icon">
+                        🔐
+                    </div>
+
+                    <h3>
+                        OAuth Authentication
+                    </h3>
+
+                    <p>
+                        Secure authentication concepts
+                        for API access.
+                    </p>
+
+                    <span>
+                        Click to learn more →
+                    </span>
+
+                </button>
+
+
+                <!-- EXTERNAL API -->
+
+                <button
+                    class="advanced-card"
+                    onclick="showExternalAPIDetails()"
+                >
+
+                    <div class="advanced-icon">
+                        🌐
+                    </div>
+
+                    <h3>
+                        External API
+                    </h3>
+
+                    <p>
+                        OpenWeather API is integrated
+                        into the application.
+                    </p>
+
+                    <span>
+                        Click to learn more →
+                    </span>
+
+                </button>
+
+
+                <!-- RATE LIMIT -->
+
+                <button
+                    class="advanced-card"
+                    onclick="showRateLimitDetails()"
+                >
+
+                    <div class="advanced-icon">
+                        🚦
+                    </div>
+
+                    <h3>
+                        Rate Limiting
+                    </h3>
+
+                    <p>
+                        Protects the API from excessive
+                        requests.
+                    </p>
+
+                    <span>
+                        Click to learn more →
+                    </span>
+
+                </button>
+
+
+                <!-- ERROR HANDLING -->
+
+                <button
+                    class="advanced-card"
+                    onclick="showErrorHandlingDetails()"
+                >
+
+                    <div class="advanced-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Error Handling
+                    </h3>
+
+                    <p>
+                        Handles invalid locations and
+                        API failures.
+                    </p>
+
+                    <span>
+                        Click to learn more →
+                    </span>
+
+                </button>
+
+
+                <!-- RESPONSIVE UI -->
+
+                <button
+                    class="advanced-card"
+                    onclick="showResponsiveDetails()"
+                >
+
+                    <div class="advanced-icon">
+                        📱
+                    </div>
+
+                    <h3>
+                        Responsive UI
+                    </h3>
+
+                    <p>
+                        Works across desktop, tablet
+                        and mobile screens.
+                    </p>
+
+                    <span>
+                        Click to learn more →
+                    </span>
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         DETAIL MODAL
+    ====================================== -->
+
+    <div
+        id="detailModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+            <button
+                class="modal-close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+            <h2 id="modalTitle">
+                Details
+            </h2>
+
+            <div id="modalBody">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script>
+
+        let currentWeather = null;
+
+
+        // =====================================
+        // ELEMENTS
+        // =====================================
+
+        const weatherForm =
+            document.getElementById("weatherForm");
+
+        const cityInput =
+            document.getElementById("cityInput");
+
+        const loading =
+            document.getElementById("loading");
+
+        const errorBox =
+            document.getElementById("errorBox");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+        const weatherSection =
+            document.getElementById("weatherSection");
+
+
+        // =====================================
+        // SEARCH WEATHER
+        // =====================================
+
+        weatherForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+                const city =
+                    cityInput.value.trim();
+
+                if (!city) {
+
+                    showError(
+                        "Please enter a city or state."
+                    );
+
+                    return;
+                }
+
+                hideError();
+
+                weatherSection.classList.add(
+                    "hidden"
+                );
+
+                loading.classList.remove(
+                    "hidden"
+                );
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `/api/weather?city=${encodeURIComponent(city)}`
+                        );
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok || !data.success) {
+
+                        throw new Error(
+                            data.message ||
+                            "Unable to get weather information."
+                        );
+
+                    }
+
+
+                    currentWeather =
+                        data.weather;
+
+
+                    displayWeather(
+                        data.weather,
+                        data.forecast
+                    );
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    showError(
+                        error.message ||
+                        "Something went wrong."
+                    );
+
+                } finally {
+
+                    loading.classList.add(
+                        "hidden"
+                    );
+
+                }
+
+            }
+        );
+
+
+        // =====================================
+        // DISPLAY WEATHER
+        // =====================================
+
+        function displayWeather(
+            weather,
+            forecast
+        ) {
+
+            weatherSection.classList.remove(
+                "hidden"
+            );
+
+
+            // LOCATION
+
+            document.getElementById(
+                "locationName"
+            ).textContent =
+                `${weather.city}, ${weather.state || weather.country}`;
+
+
+            // DESCRIPTION
+
+            document.getElementById(
+                "weatherDescription"
+            ).textContent =
+                capitalize(
+                    weather.description
+                );
+
+
+            // ICON
+
+            document.getElementById(
+                "weatherIcon"
+            ).src =
+                `https://openweathermap.org/img/wn/${weather.icon}@2x.png`;
+
+
+            // TEMPERATURE
+
+            document.getElementById(
+                "temperature"
+            ).textContent =
+                `${Math.round(weather.temperature)}°C`;
+
+
+            // MAIN WEATHER
+
+            document.getElementById(
+                "weatherMain"
+            ).textContent =
+                weather.main;
+
+
+            // WEATHER CARD
+
+            document.getElementById(
+                "weatherCardValue"
+            ).textContent =
+                weather.main;
+
+
+            // PRESSURE
+
+            document.getElementById(
+                "pressure"
+            ).textContent =
+                `${weather.pressure} hPa`;
+
+
+            // HUMIDITY
+
+            document.getElementById(
+                "humidity"
+            ).textContent =
+                `${weather.humidity}%`;
+
+
+            // FEELS LIKE
+
+            document.getElementById(
+                "feelsLike"
+            ).textContent =
+                `${Math.round(weather.feelsLike)}°C`;
+
+
+            // WIND
+
+            document.getElementById(
+                "windSpeed"
+            ).textContent =
+                `${weather.windSpeed} m/s`;
+
+
+            // VISIBILITY
+
+            document.getElementById(
+                "visibility"
+            ).textContent =
+                weather.visibility !== null
+                    ? `${weather.visibility} km`
+                    : "N/A";
+
+
+            // SUNRISE
+
+            document.getElementById(
+                "sunrise"
+            ).textContent =
+                formatTime(weather.sunrise);
+
+
+            // SUNSET
+
+            document.getElementById(
+                "sunset"
+            ).textContent =
+                formatTime(weather.sunset);
+
+
+            // COORDINATES
+
+            document.getElementById(
+                "coordinates"
+            ).textContent =
+                `${weather.latitude.toFixed(2)}, ${weather.longitude.toFixed(2)}`;
+
+
+            // FORECAST
+
+            displayForecast(forecast);
+
+        }
+
+
+        // =====================================
+        // DISPLAY FORECAST
+        // =====================================
+
+        function displayForecast(
+            forecast
+        ) {
+
+            const forecastGrid =
+                document.getElementById(
+                    "forecastGrid"
+                );
+
+            forecastGrid.innerHTML = "";
+
+
+            if (
+                !forecast ||
+                forecast.length === 0
+            ) {
+
+                forecastGrid.innerHTML =
+                    "<p>No forecast available.</p>";
+
+                return;
+            }
+
+
+            forecast.forEach(day => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "forecast-card";
+
+
+                card.innerHTML = `
+
+                    <h3>
+                        ${formatDate(day.date)}
+                    </h3>
+
+                    <img
+                        src="https://openweathermap.org/img/wn/${day.icon}@2x.png"
+                        alt="${day.description}"
+                    >
+
+                    <p class="forecast-main">
+                        ${capitalize(day.main)}
+                    </p>
+
+                    <p>
+                        ${capitalize(day.description)}
+                    </p>
+
+                    <div class="forecast-temp">
+
+                        <strong>
+                            ${Math.round(day.temperature)}°C
+                        </strong>
+
+                        <span>
+                            ${Math.round(day.min)}° /
+                            ${Math.round(day.max)}°
+                        </span>
+
+                    </div>
+
+                `;
+
+
+                forecastGrid.appendChild(card);
+
+            });
+
+        }
+
+
+        // =====================================
+        // WEATHER DETAILS
+        // =====================================
+
+        function showWeatherDetails() {
+
+            if (!currentWeather) {
+
+                showError(
+                    "Please search for a city first."
+                );
+
+                return;
+            }
+
+
+            openModal(
+                "🌤️ Weather Details",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        Current Weather
+                    </h3>
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Weather Condition
+                        </strong>
+
+                        <p>
+                            ${currentWeather.main}
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Description
+                        </strong>
+
+                        <p>
+                            ${capitalize(
+                                currentWeather.description
+                            )}
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Temperature
+                        </strong>
+
+                        <p>
+                            ${Math.round(
+                                currentWeather.temperature
+                            )}°C
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Feels Like
+                        </strong>
+
+                        <p>
+                            ${Math.round(
+                                currentWeather.feelsLike
+                            )}°C
+                        </p>
+
+                    </div>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // PRESSURE DETAILS
+        // =====================================
+
+        function showPressureDetails() {
+
+            if (!currentWeather) {
+
+                showError(
+                    "Please search for a city first."
+                );
+
+                return;
+            }
+
+
+            openModal(
+                "📊 Pressure Details",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        Atmospheric Pressure
+                    </h3>
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Current Pressure
+                        </strong>
+
+                        <p>
+                            ${currentWeather.pressure} hPa
+                        </p>
+
+                    </div>
+
+                    <p>
+                        Atmospheric pressure represents the
+                        pressure exerted by the atmosphere at
+                        the selected location.
+                    </p>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // HUMIDITY DETAILS
+        // =====================================
+
+        function showHumidityDetails() {
+
+            if (!currentWeather) {
+
+                showError(
+                    "Please search for a city first."
+                );
+
+                return;
+            }
+
+
+            openModal(
+                "💧 Humidity Details",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        Relative Humidity
+                    </h3>
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Current Humidity
+                        </strong>
+
+                        <p>
+                            ${currentWeather.humidity}%
+                        </p>
+
+                    </div>
+
+                    <p>
+                        Humidity represents the amount of
+                        water vapor present in the air.
+                    </p>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // FEELS LIKE DETAILS
+        // =====================================
+
+        function showFeelsLikeDetails() {
+
+            if (!currentWeather) {
+
+                showError(
+                    "Please search for a city first."
+                );
+
+                return;
+            }
+
+
+            openModal(
+                "🤒 Feels Like Details",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        Feels Like Temperature
+                    </h3>
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Actual Temperature
+                        </strong>
+
+                        <p>
+                            ${Math.round(
+                                currentWeather.temperature
+                            )}°C
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Feels Like
+                        </strong>
+
+                        <p>
+                            ${Math.round(
+                                currentWeather.feelsLike
+                            )}°C
+                        </p>
+
+                    </div>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // WIND DETAILS
+        // =====================================
+
+        function showWindDetails() {
+
+            if (!currentWeather) {
+
+                showError(
+                    "Please search for a city first."
+                );
+
+                return;
+            }
+
+
+            openModal(
+                "💨 Wind Details",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        Wind Information
+                    </h3>
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Wind Speed
+                        </strong>
+
+                        <p>
+                            ${currentWeather.windSpeed} m/s
+                        </p>
+
+                    </div>
+
+                    <p>
+                        Wind speed indicates how quickly air
+                        is moving at the selected location.
+                    </p>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // VISIBILITY DETAILS
+        // =====================================
+
+        function showVisibilityDetails() {
+
+            if (!currentWeather) {
+
+                showError(
+                    "Please search for a city first."
+                );
+
+                return;
+            }
+
+
+            openModal(
+                "👁️ Visibility Details",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        Visibility Information
+                    </h3>
+
+                    <div class="detail-box">
+
+                        <strong>
+                            Visibility
+                        </strong>
+
+                        <p>
+                            ${
+                                currentWeather.visibility !== null
+                                ? currentWeather.visibility + " km"
+                                : "N/A"
+                            }
+                        </p>
+
+                    </div>
+
+                    <p>
+                        Visibility indicates the distance
+                        at which objects can generally be
+                        clearly observed.
+                    </p>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // OAUTH DETAILS
+        // =====================================
+
+        function showOAuthDetails() {
+
+            openModal(
+                "🔐 OAuth Authentication",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        OAuth Authentication
+                    </h3>
+
+                    <p>
+                        OAuth is an authentication and
+                        authorization framework used to
+                        securely access protected APIs.
+                    </p>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🔑 Purpose
+                        </strong>
+
+                        <p>
+                            OAuth allows an application to
+                            access resources without directly
+                            sharing the user's password.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🛡️ Security
+                        </strong>
+
+                        <p>
+                            Access tokens can be used instead
+                            of exposing sensitive login
+                            credentials.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            📚 Task 7 Concept
+                        </strong>
+
+                        <p>
+                            OAuth authentication is demonstrated
+                            here as an advanced API authentication
+                            concept.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // EXTERNAL API DETAILS
+        // =====================================
+
+        function showExternalAPIDetails() {
+
+            openModal(
+                "🌐 External API Integration",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        🌐 OpenWeather External API
+                    </h3>
+
+                    <p>
+                        This application communicates with
+                        the OpenWeather external API to obtain
+                        weather information.
+                    </p>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            📡 API Used
+                        </strong>
+
+                        <p>
+                            OpenWeather Geocoding API,
+                            Current Weather API and
+                            5-Day Forecast API.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            📍 Location
+                        </strong>
+
+                        <p>
+                            The entered city or state is
+                            converted into latitude and
+                            longitude.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🌤️ Weather Data
+                        </strong>
+
+                        <p>
+                            Temperature, humidity, pressure,
+                            wind speed, visibility, sunrise,
+                            sunset and forecast information
+                            are displayed.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // RATE LIMITING DETAILS
+        // =====================================
+
+        function showRateLimitDetails() {
+
+            openModal(
+                "🚦 Rate Limiting",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        🚦 API Rate Limiting
+                    </h3>
+
+                    <p>
+                        Rate limiting controls how many
+                        requests a client can send to the
+                        weather API.
+                    </p>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            ⏱️ Time Window
+                        </strong>
+
+                        <p>
+                            15 minutes
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🔢 Maximum Requests
+                        </strong>
+
+                        <p>
+                            30 requests per 15 minutes
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🛡️ Protection
+                        </strong>
+
+                        <p>
+                            Rate limiting helps protect the
+                            application from excessive API
+                            requests.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            ⚠️ Limit Exceeded
+                        </strong>
+
+                        <p>
+                            The server returns a message asking
+                            the user to try again later.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // ERROR HANDLING DETAILS
+        // =====================================
+
+        function showErrorHandlingDetails() {
+
+            openModal(
+                "⚠️ Error Handling",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        ⚠️ Error Handling
+                    </h3>
+
+                    <p>
+                        The application handles different
+                        types of errors and displays
+                        understandable messages.
+                    </p>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            ❌ Empty Search
+                        </strong>
+
+                        <p>
+                            The application asks the user
+                            to enter a city or state.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🔍 Invalid Location
+                        </strong>
+
+                        <p>
+                            If a location cannot be found,
+                            the application displays an
+                            appropriate error message.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🔑 API Key Error
+                        </strong>
+
+                        <p>
+                            The server checks whether the
+                            weather API key is configured.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🌐 API Service Error
+                        </strong>
+
+                        <p>
+                            Problems with the external
+                            weather service are handled
+                            without crashing the application.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // RESPONSIVE UI DETAILS
+        // =====================================
+
+        function showResponsiveDetails() {
+
+            openModal(
+                "📱 Responsive UI",
+
+                `
+
+                <div class="detail-content">
+
+                    <h3>
+                        📱 Responsive User Interface
+                    </h3>
+
+                    <p>
+                        The Task 7 interface is designed
+                        to work on different screen sizes.
+                    </p>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🖥️ Desktop
+                        </strong>
+
+                        <p>
+                            Weather cards and advanced API
+                            cards are displayed in multiple
+                            columns.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            📱 Mobile
+                        </strong>
+
+                        <p>
+                            The layout automatically changes
+                            to fit smaller screens.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            💻 Tablet
+                        </strong>
+
+                        <p>
+                            Cards and weather information
+                            resize and rearrange according
+                            to the available space.
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <strong>
+                            🎨 CSS Media Queries
+                        </strong>
+
+                        <p>
+                            CSS media queries are used to
+                            make the interface responsive.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                `
+            );
+
+        }
+
+
+        // =====================================
+        // OPEN MODAL
+        // =====================================
+
+        function openModal(
+            title,
+            content
+        ) {
+
+            document.getElementById(
+                "modalTitle"
+            ).innerHTML = title;
+
+            document.getElementById(
+                "modalBody"
+            ).innerHTML = content;
+
+            document.getElementById(
+                "detailModal"
+            ).classList.add("show");
+
+        }
+
+
+        // =====================================
+        // CLOSE MODAL
+        // =====================================
+
+        function closeModal() {
+
+            document.getElementById(
+                "detailModal"
+            ).classList.remove("show");
+
+        }
+
+
+        // =====================================
+        // CLOSE MODAL WHEN CLICKING OUTSIDE
+        // =====================================
+
+        document.getElementById(
+            "detailModal"
+        ).addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target === this
+                ) {
+
+                    closeModal();
+
+                }
+
+            }
+        );
+
+
+        // =====================================
+        // ERROR DISPLAY
+        // =====================================
+
+        function showError(message) {
+
+            errorMessage.textContent =
+                message;
+
+            errorBox.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        function hideError() {
+
+            errorBox.classList.add(
+                "hidden"
+            );
+
+            errorMessage.textContent =
+                "";
+
+        }
+
+
+        // =====================================
+        // FORMAT TIME
+        // =====================================
+
+        function formatTime(timestamp) {
+
+            if (!timestamp) {
+                return "N/A";
+            }
+
+            return new Date(
+                timestamp * 1000
+            ).toLocaleTimeString(
+                [],
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+        }
+
+
+        // =====================================
+        // FORMAT DATE
+        // =====================================
+
+        function formatDate(dateString) {
+
+            const date =
+                new Date(
+                    `${dateString}T12:00:00`
+                );
+
+            return date.toLocaleDateString(
+                [],
+                {
+                    weekday: "short",
+                    month: "short",
+                    day: "numeric"
+                }
+            );
+
+        }
+
+
+        // =====================================
+        // CAPITALIZE
+        // =====================================
+
+        function capitalize(text) {
+
+            if (!text) {
+                return "";
+            }
+
+            return text
+                .charAt(0)
+                .toUpperCase()
+                +
+                text.slice(1);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
